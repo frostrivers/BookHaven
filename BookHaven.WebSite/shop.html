@@ -1,0 +1,82 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shop - Book Haven Bookstore</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <img src="images/logo.png" alt="Book Haven Bookstore Logo" class="logo">
+            <h1>Book Haven Bookstore</h1>
+        </div>
+        <button class="hamburger"
+                id="hamburger"
+                aria-label="Toggle navigation menu"
+                aria-expanded="false"
+                aria-controls="nav-menu">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+        </button>
+        <nav id="nav-menu" class="nav-menu" aria-label="Main Navigation">
+            <ul>
+                <li><a href="index.html#home">Home</a></li>
+                <li><a href="index.html#about">About</a></li>
+                <li><a href="shop.html">Shop</a></li>
+                <li><a href="index.html#hours">Hours</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="shop" class="shop-section">
+            <h2>Browse Our Collection</h2>
+
+            <div class="search-container">
+                <div class="search-wrapper">
+                    <input type="text"
+                           id="search-input"
+                           class="search-bar"
+                           placeholder="Search by title, author, or ISBN..."
+                           aria-label="Search books">
+                    <button id="clear-search-btn" class="clear-btn" aria-label="Clear search">✕</button>
+                </div>
+                <div id="search-results-info" class="search-results-info"></div>
+            </div>
+
+            <div id="product-grid" class="books-grid">
+                <!-- Books will be loaded here dynamically -->
+            </div>
+
+            <div class="pagination-controls">
+                <div id="pagination-info" class="pagination-info"></div>
+                <div class="pagination-buttons">
+                    <button id="prev-page" class="cta-button">← Previous</button>
+                    <div id="page-numbers" class="page-numbers"></div>
+                    <button id="next-page" class="cta-button">Next →</button>
+                </div>
+                <div class="page-size-control">
+                    <label for="page-size">Books per page:</label>
+                    <select id="page-size">
+                        <option value="6" selected>6</option>
+                        <option value="12">12</option>
+                        <option value="24">24</option>
+                    </select>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Book Haven Bookstore. All rights reserved.</p>
+    </footer>
+
+    <script src="api-config.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>

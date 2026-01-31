@@ -1,0 +1,94 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Haven Bookstore</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <img src="images/logo.png" alt="Book Haven Bookstore Logo" class="logo">
+            <h1>Book Haven Bookstore</h1>
+        </div>
+        <button class="hamburger"
+                id="hamburger"
+                aria-label="Toggle navigation menu"
+                aria-expanded="false"
+                aria-controls="nav-menu">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+        </button>
+        <nav id="nav-menu" class="nav-menu" aria-label="Main Navigation">
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="shop.html">Shop</a></li>
+                <li><a href="#hours">Hours</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+
+        <section id="home" class="hero">
+            <h2>Welcome to Book Haven</h2>
+            <p>
+                Discover a world of words, knowledge, and inspiration.
+                Explore our collection online or visit us in-store.
+            </p>
+            <a href="#about" class="cta-button">Learn More</a>
+            <a href="shop.html" class="cta-button">Browse Shop</a>
+        </section>
+
+        <section id="about">
+            <h2>About Us</h2>
+            <p>
+                Book Haven Bookstore is a local treasure for book enthusiasts, offering
+                a diverse selection of books, magazines, journals, and office supplies.
+                Our mission is to foster a love of reading while building a vibrant
+                literary community.
+            </p>
+        </section>
+
+        <section id="hours">
+            <h2>Hours of Operation</h2>
+            <ul>
+                <li>Monday–Friday: 9 a.m. – 8 p.m.</li>
+                <li>Saturday: 10 a.m. – 6 p.m.</li>
+                <li>Sunday: 11 a.m. – 5 p.m.</li>
+            </ul>
+        </section>
+
+        <section id="contact">
+            <h2>Get in Touch</h2>
+            <p>Have questions or need recommendations? Reach out to us!</p>
+
+            <form action="#" method="post">
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name" required>
+
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required>
+
+                <label for="message">Message</label>
+                <textarea id="message" name="message" required></textarea>
+
+                <button type="submit" class="cta-button">Send</button>
+            </form>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Book Haven Bookstore. All rights reserved.</p>
+    </footer>
+
+    <script src="api-config.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>

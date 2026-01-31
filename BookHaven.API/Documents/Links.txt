@@ -1,0 +1,20 @@
+https://app.sophia.org/spcc/introduction-to-web-development-2-touchstone-3-1
+
+https://stackblitz.com/edit/stackblitz-starters-hnpspnbx?file=package-lock.json,index.html,script.js,styles.css,shop.html,api-config.js
+
+
+https://walmart.workforceedge.com/
+
+
+search bar
+working shop Page
+data storage on customers 
+pictures that dont crash stackblitzs and make me lose 2 hours of progress because a damn png was too pngy 
+a contact page where you can 'sign up"
+about us page with more details 
+
+
+
+
+deadrunner.0@Gmail.com
+Harelip!22

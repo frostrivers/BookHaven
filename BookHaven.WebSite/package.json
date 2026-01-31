@@ -1,0 +1,8 @@
+{
+  "scripts": {
+    "convert-logo": "node convert-logo.js"
+  },
+  "devDependencies": {
+    "sharp": "^0.33.0"
+  }
+}
