@@ -1,8 +1,8 @@
-// Configuration
-//const API_BASE_URL = 'https://localhost:7233'; // Update with your API URL
+﻿// Configuration
+// I put this in the api-config.js  Easy to find there
 
 // Error timeout constant
-const REQUEST_TIMEOUT = 5000; // 5 seconds
+const REQUEST_TIMEOUT = 15000; // 5 seconds
 
 // Pagination and search state
 const appState = {
@@ -14,8 +14,110 @@ const appState = {
     isSearching: false,
     searchQuery: '',
     debounceTimer: null,
-    isLoading: false
+    isLoading: false,
+    selectedItemTypeFilter: null,
+    selectedItemTypeName: null
 };
+
+// ===== SHOPPING CART FUNCTIONALITY =====
+// Initialize cart from localStorage
+const cart = {
+    items: JSON.parse(localStorage.getItem('cart') || '[]'),
+
+    save() {
+        localStorage.setItem('cart', JSON.stringify(this.items));
+        this.updateCartDisplay();
+    },
+
+    addItem(bookId, title, price) {
+        const existingItem = this.items.find(item => item.bookId === bookId);
+
+        if (existingItem) {
+            existingItem.quantity += 1;
+        } else {
+            this.items.push({
+                bookId,
+                title,
+                price: parseFloat(price),
+                quantity: 1
+            });
+        }
+
+        this.save();
+        showCartNotification(`"${title}" added to cart!`);
+    },
+
+    removeItem(bookId) {
+        this.items = this.items.filter(item => item.bookId !== bookId);
+        this.save();
+    },
+
+    updateQuantity(bookId, quantity) {
+        const item = this.items.find(item => item.bookId === bookId);
+        if (item) {
+            item.quantity = Math.max(1, quantity);
+            this.save();
+        }
+    },
+
+    getTotal() {
+        return this.items.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+    },
+
+    getItemCount() {
+        return this.items.reduce((sum, item) => sum + item.quantity, 0);
+    },
+
+    clear() {
+        this.items = [];
+        this.save();
+    },
+
+    updateCartDisplay() {
+        const cartCount = document.getElementById('cart-count');
+        const itemCount = this.getItemCount();
+
+        if (cartCount) {
+            cartCount.textContent = itemCount;
+            cartCount.style.display = itemCount > 0 ? 'block' : 'none';
+        }
+    }
+};
+
+// Handle "Add to Cart" button click
+function handleAddToCart(event) {
+    const btn = event.target;
+    const bookId = parseInt(btn.getAttribute('data-book-id'));
+    const title = btn.getAttribute('data-book-title');
+    const price = btn.getAttribute('data-book-price');
+
+    cart.addItem(bookId, title, price);
+
+    // Provide visual feedback
+    btn.classList.add('success');
+    btn.textContent = '✓ Added!';
+    setTimeout(() => {
+        btn.classList.remove('success');
+        btn.textContent = 'Add to Cart';
+    }, 2000);
+}
+
+// Show cart notification
+function showCartNotification(message) {
+    const notification = document.createElement('div');
+    notification.className = 'cart-notification';
+    notification.textContent = message;
+    document.body.appendChild(notification);
+
+    setTimeout(() => {
+        notification.classList.add('show');
+    }, 10);
+
+    setTimeout(() => {
+        notification.classList.remove('show');
+        notification.remove();
+    }, 3000);
+}
 
 document.addEventListener('DOMContentLoaded', () => {
     // Verify ApiConfig is loaded before proceeding
@@ -30,9 +132,126 @@ document.addEventListener('DOMContentLoaded', () => {
         loadBooks();
         setupPaginationControls();
         setupSearchControls();
+        loadItemTypeFilters(); // Add this line
     }
     setupNavigation();
+    cart.updateCartDisplay();
 });
+
+// Load and display ItemType filters
+async function loadItemTypeFilters() {
+    try {
+        const response = await fetchWithTimeout(
+            `${ApiConfig.getEndpoint('BOOKS')}/categories`
+        );
+
+        const categories = await handleApiResponse(response, 'loading item type filters');
+
+        // Get unique item types with proper names
+        const uniqueTypes = new Map();
+        
+        // We need to fetch all books first to get ItemType names
+        const allBooksResponse = await fetchWithTimeout(
+            `${ApiConfig.getEndpoint('BOOKS')}?pageNumber=1&pageSize=50`
+        );
+        const allBooksData = await handleApiResponse(allBooksResponse, 'loading books for filters');
+        
+        // Extract unique ItemTypes
+        const itemTypes = new Map();
+        allBooksData.data.forEach(book => {
+            if (book.itemTypeId && !itemTypes.has(book.itemTypeId)) {
+                itemTypes.set(book.itemTypeId, book.itemTypeName);
+            }
+        });
+
+        displayItemTypeFilters(Array.from(itemTypes.entries()));
+        setupFilterControls();
+    } catch (error) {
+        console.error('Error loading item type filters:', error);
+    }
+}
+
+// Display ItemType filter buttons
+function displayItemTypeFilters(itemTypes) {
+    const filterContainer = document.getElementById('itemtype-filter');
+    if (!filterContainer) return;
+
+    filterContainer.innerHTML = ''; // Clear existing buttons
+
+    if (itemTypes.length === 0) {
+        filterContainer.innerHTML = '<p class="no-filters">No item types available.</p>';
+        return;
+    }
+
+    itemTypes.forEach(([typeId, typeName]) => {
+        const button = document.createElement('button');
+        button.classList.add('filter-btn');
+        button.setAttribute('data-itemtype-id', typeId);
+        button.setAttribute('data-itemtype-name', typeName);
+        button.textContent = typeName;
+        
+        button.addEventListener('click', () => {
+            handleItemTypeFilterClick(typeId, typeName, button);
+        });
+        
+        filterContainer.appendChild(button);
+    });
+}
+
+// Handle ItemType filter button click
+function handleItemTypeFilterClick(itemTypeId, itemTypeName, buttonElement) {
+    // Toggle filter
+    if (appState.selectedItemTypeFilter === itemTypeId) {
+        // Deselect filter
+        appState.selectedItemTypeFilter = null;
+        appState.selectedItemTypeName = null;
+        buttonElement.classList.remove('active');
+        clearSearch(); // Reset to show all books
+    } else {
+        // Select new filter
+        // Remove active class from all buttons
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.classList.remove('active');
+        });
+        
+        // Add active class to clicked button
+        appState.selectedItemTypeFilter = itemTypeId;
+        appState.selectedItemTypeName = itemTypeName;
+        buttonElement.classList.add('active');
+        
+        // Update search input and search
+        const searchInput = document.getElementById('search-input');
+        if (searchInput) {
+            searchInput.value = itemTypeName;
+        }
+        
+        appState.searchQuery = itemTypeName;
+        appState.currentPage = 1;
+        appState.isSearching = true;
+        searchBooks();
+        
+        // Scroll to top
+        const shopSection = document.getElementById('shop');
+        if (shopSection) {
+            shopSection.scrollIntoView({ behavior: 'smooth' });
+        }
+    }
+}
+
+// Setup filter controls
+function setupFilterControls() {
+    const clearFilterBtn = document.getElementById('clear-filter-btn');
+    if (clearFilterBtn) {
+        clearFilterBtn.addEventListener('click', () => {
+            appState.selectedItemTypeFilter = null;
+            appState.selectedItemTypeName = null;
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            clearSearch();
+        });
+    }
+}
 
 // Setup search event listeners
 function setupSearchControls() {
@@ -308,18 +527,88 @@ function displayBooks(books) {
         card.classList.add('product-card');
         card.innerHTML = `
             <div class="product-image">
-                <img src="images/book-placeholder.jpg" alt="${escapeHtml(book.title)}">
+                <img src="${book.coverImage || 'images/book-placeholder.jpg'}" alt="${escapeHtml(book.title)}">
             </div>
             <h3>${highlightSearchTerm(book.title)}</h3>
-            <p class="author">Author ID: ${book.authorId}${book.authorName ? ` (${escapeHtml(book.authorName)})` : ''}</p>
-            <p class="genre">Genre ID: ${book.genreId}</p>
+            <p class="author">Author: <a href="#" class="author-link" data-author="${escapeHtml(book.authorName || 'Unknown')}">${escapeHtml(book.authorName || 'Unknown')}</a></p>
+            <p class="itemType">Item Type: <a href="#" class="itemtype-link" data-itemtype-id="${book.itemTypeId}" data-itemtype-name="${escapeHtml(book.itemTypeName || 'Unknown')}">${escapeHtml(book.itemTypeName || 'Unknown')}</a></p>
             <p class="description">${escapeHtml(book.description || 'No description available')}</p>
             <p class="price">$${parseFloat(book.price).toFixed(2)}</p>
             <p class="stock">In Stock: ${book.stockQuantity}</p>
-            <a href="index.html#contact" class="cta-button">Inquire</a>
+            <button class="cta-button add-to-cart-btn" data-book-id="${book.id}" data-book-title="${escapeHtml(book.title)}" data-book-price="${book.price}">Add to Cart</button>
         `;
         grid.appendChild(card);
     });
+
+    // Attach event listeners to "Add to Cart" buttons
+    document.querySelectorAll('.add-to-cart-btn').forEach(btn => {
+        btn.addEventListener('click', handleAddToCart);
+    });
+
+    // Attach event listeners to author links
+    document.querySelectorAll('.author-link').forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const authorName = link.getAttribute('data-author');
+            searchByAuthor(authorName);
+        });
+    });
+
+    // Attach event listeners to item type links
+    document.querySelectorAll('.itemtype-link').forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const itemTypeId = link.getAttribute('data-itemtype-id');
+            const itemTypeName = link.getAttribute('data-itemtype-name');
+            searchByItemType(itemTypeId, itemTypeName);
+        });
+    });
+}
+
+// Search for all books by a specific author
+function searchByAuthor(authorName) {
+    // Set search state
+    appState.searchQuery = authorName;
+    appState.currentPage = 1;
+    appState.isSearching = true;
+
+    // Update search input to reflect the query
+    const searchInput = document.getElementById('search-input');
+    if (searchInput) {
+        searchInput.value = authorName;
+    }
+
+    // Perform the search
+    searchBooks();
+
+    // Scroll to top of shop section
+    const shopSection = document.getElementById('shop');
+    if (shopSection) {
+        shopSection.scrollIntoView({ behavior: 'smooth' });
+    }
+}
+
+// Search for all books by a specific item type
+function searchByItemType(itemTypeId, itemTypeName) {
+    // Set search state
+    appState.searchQuery = itemTypeName;
+    appState.currentPage = 1;
+    appState.isSearching = true;
+
+    // Update search input to reflect the query
+    const searchInput = document.getElementById('search-input');
+    if (searchInput) {
+        searchInput.value = itemTypeName;
+    }
+
+    // Perform the search
+    searchBooks();
+
+    // Scroll to top of shop section
+    const shopSection = document.getElementById('shop');
+    if (shopSection) {
+        shopSection.scrollIntoView({ behavior: 'smooth' });
+    }
 }
 
 // Escape HTML to prevent XSS attacks

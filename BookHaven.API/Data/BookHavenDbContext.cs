@@ -11,8 +11,8 @@ namespace BookHaven.API.Data
 
         public DbSet<UserInfo> Users { get; set; }
         public DbSet<AuthorInfo> Authors { get; set; }
-        public DbSet<GenreInfo> Genres { get; set; }
-        public DbSet<BookInfo> Books { get; set; }
+        public DbSet<ItemTypeInfo> ItemTypes { get; set; }
+        public DbSet<SellItemInfo> SellItems { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -38,24 +38,27 @@ namespace BookHaven.API.Data
                 .IsRequired()
                 .HasMaxLength(200);
 
-            // Configure GenreInfo
-            modelBuilder.Entity<GenreInfo>()
+            // Configure ItemTypeInfo
+            modelBuilder.Entity<ItemTypeInfo>()
                 .HasKey(g => g.Id);
-            modelBuilder.Entity<GenreInfo>()
+            modelBuilder.Entity<ItemTypeInfo>()
                 .Property(g => g.Name)
                 .IsRequired()
                 .HasMaxLength(100);
 
-            // Configure BookInfo
-            modelBuilder.Entity<BookInfo>()
+            // Configure SellItemInfo
+            modelBuilder.Entity<SellItemInfo>()
                 .HasKey(b => b.Id);
-            modelBuilder.Entity<BookInfo>()
+            modelBuilder.Entity<SellItemInfo>()
                 .Property(b => b.Title)
                 .IsRequired()
                 .HasMaxLength(255);
-            modelBuilder.Entity<BookInfo>()
+            modelBuilder.Entity<SellItemInfo>()
                 .Property(b => b.ISBN)
                 .HasMaxLength(13);
+            modelBuilder.Entity<SellItemInfo>()
+                .Property(b => b.CoverImage)
+                .HasColumnType("LONGTEXT");
         }
     }
 }

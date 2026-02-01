@@ -10,6 +10,8 @@
 
         public string Biography { get; set; }
 
+        public string? CoverImage { get; set; }
+
         public override string ToString()
         {
             return $"{Name} (Born on {BirthDate.ToShortDateString()}): {Biography}";
