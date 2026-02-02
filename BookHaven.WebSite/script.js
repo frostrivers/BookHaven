@@ -594,7 +594,7 @@ function searchByItemType(itemTypeId, itemTypeName) {
     appState.searchQuery = itemTypeName;
     appState.currentPage = 1;
     appState.isSearching = true;
-
+    ''
     // Update search input to reflect the query
     const searchInput = document.getElementById('search-input');
     if (searchInput) {

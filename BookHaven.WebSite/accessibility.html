@@ -1,0 +1,89 @@
+﻿<!-- Accessibility Preferences Button and Modal -->
+<button id="a11y-toggle"
+        class="a11y-button"
+        aria-label="Open accessibility preferences"
+        title="Accessibility Options">
+    ♿
+</button>
+
+<!-- Accessibility Preferences Modal -->
+<div id="a11y-modal" class="a11y-modal" role="dialog" aria-labelledby="a11y-modal-title" hidden>
+    <div class="a11y-modal-content">
+        <div class="a11y-modal-header">
+            <h2 id="a11y-modal-title">Accessibility Preferences</h2>
+            <button id="a11y-close" class="a11y-close-btn" aria-label="Close accessibility preferences">
+                ×
+            </button>
+        </div>
+
+        <div class="a11y-modal-body">
+            <!-- Font Size -->
+            <fieldset class="a11y-preference-group">
+                <legend>Font Size</legend>
+                <div class="a11y-option">
+                    <button class="a11y-size-btn" data-size="small" aria-label="Decrease font size">
+                        A−
+                    </button>
+                    <span class="a11y-size-display" id="size-display">100%</span>
+                    <button class="a11y-size-btn" data-size="large" aria-label="Increase font size">
+                        A+
+                    </button>
+                </div>
+            </fieldset>
+
+            <!-- Color Contrast -->
+            <fieldset class="a11y-preference-group">
+                <legend>Color Contrast</legend>
+                <label class="a11y-checkbox">
+                    <input type="checkbox" id="a11y-high-contrast" aria-describedby="contrast-desc">
+                    <span>High Contrast Mode</span>
+                </label>
+                <p id="contrast-desc" class="a11y-description">Increases text/background contrast for better readability</p>
+            </fieldset>
+
+            <!-- Dark Mode -->
+            <fieldset class="a11y-preference-group">
+                <legend>Color Theme</legend>
+                <label class="a11y-checkbox">
+                    <input type="checkbox" id="a11y-dark-mode" aria-describedby="dark-desc">
+                    <span>Dark Mode</span>
+                </label>
+                <p id="dark-desc" class="a11y-description">Reduces eye strain in low-light environments</p>
+            </fieldset>
+
+            <!-- Text Spacing -->
+            <fieldset class="a11y-preference-group">
+                <legend>Text Spacing</legend>
+                <label class="a11y-checkbox">
+                    <input type="checkbox" id="a11y-spacing" aria-describedby="spacing-desc">
+                    <span>Increase Spacing</span>
+                </label>
+                <p id="spacing-desc" class="a11y-description">Increases line height and letter spacing</p>
+            </fieldset>
+
+            <!-- Reduce Motion -->
+            <fieldset class="a11y-preference-group">
+                <legend>Motion</legend>
+                <label class="a11y-checkbox">
+                    <input type="checkbox" id="a11y-reduce-motion" aria-describedby="motion-desc">
+                    <span>Reduce Motion</span>
+                </label>
+                <p id="motion-desc" class="a11y-description">Minimizes animations and transitions</p>
+            </fieldset>
+
+            <!-- Focus Indicator -->
+            <fieldset class="a11y-preference-group">
+                <legend>Focus Indicator</legend>
+                <label class="a11y-checkbox">
+                    <input type="checkbox" id="a11y-focus-indicator" aria-describedby="focus-desc">
+                    <span>Enhanced Focus Indicator</span>
+                </label>
+                <p id="focus-desc" class="a11y-description">Highlights keyboard focus more prominently</p>
+            </fieldset>
+        </div>
+
+        <div class="a11y-modal-footer">
+            <button id="a11y-reset" class="a11y-reset-btn">Reset to Defaults</button>
+        </div>
+    </div>
+</div>

@@ -13,6 +13,7 @@ namespace BookHaven.API.Data
         public DbSet<AuthorInfo> Authors { get; set; }
         public DbSet<ItemTypeInfo> ItemTypes { get; set; }
         public DbSet<SellItemInfo> SellItems { get; set; }
+        public DbSet<SubscriberInfo> Subscribers { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -59,6 +60,20 @@ namespace BookHaven.API.Data
             modelBuilder.Entity<SellItemInfo>()
                 .Property(b => b.CoverImage)
                 .HasColumnType("LONGTEXT");
+
+            // Configure SubscriberInfo
+            modelBuilder.Entity<SubscriberInfo>()
+                .HasKey(s => s.Id);
+            modelBuilder.Entity<SubscriberInfo>()
+                .Property(s => s.Email)
+                .IsRequired()
+                .HasMaxLength(255);
+            modelBuilder.Entity<SubscriberInfo>()
+                .HasIndex(s => s.Email)
+                .IsUnique();
+            modelBuilder.Entity<SubscriberInfo>()
+                .Property(s => s.Name)
+                .HasMaxLength(100);
         }
     }
 }

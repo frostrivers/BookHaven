@@ -1,0 +1,237 @@
+﻿********************************************************
+⦁     Accessibility:
+To receive full credit, you will need to include at least three rationales for accessibility. Refer to Tutorial 2.4.5 for accessibility best practices and accessibility testing.  
+
+* These three enhancements address WCAG 2.1 Level AA compliance and will significantly improve your website's accessibility for all users.
+1. Keyboard Navigation & Focus Management
+Rationale: Users with motor disabilities rely on keyboard navigation. Visible focus indicators ensure users know which element is currently active.
+
+2. Color Contrast & Improved Color Accessibility
+Rationale: Users with color blindness or low vision need sufficient contrast between text and background. WCAG 2.1 requires a minimum contrast ratio of 4.5:1 for normal text.
+
+3. Semantic HTML & ARIA Labels
+Rationale: Screen reader users depend on semantic HTML and proper ARIA labels to understand page structure and interactive elements.
+
+
+
+Accessibility Features Implemented
+1. Keyboard Navigation & Focus Management ✅
+Description: Users can navigate your entire site using only the keyboard. Tab through all interactive elements, and the modal can be closed with the Escape key. Focus is properly managed when opening/closing the accessibility panel.
+Features:
+•	Tab navigation through all buttons, links, and form fields
+•	Escape key closes the accessibility modal
+•	Focus returns to toggle button after closing modal
+•	Skip-to-main-content link for quick navigation
+---
+2. Semantic HTML & ARIA Labels ✅
+Description: Your HTML uses semantic elements and ARIA attributes so screen readers can properly interpret page structure and interactive elements.
+Features:
+•	Semantic elements: <header>, <main>, <nav>, <section>, <footer>
+•	ARIA labels on buttons: aria-label="..."
+•	ARIA descriptions: aria-describedby="..."
+•	ARIA attributes for forms: aria-required="true"
+•	ARIA states: aria-expanded, aria-hidden, aria-controls
+•	Proper heading hierarchy (h1, h2, h3)
+•	Fieldset and legend elements for form grouping
+•	Role attributes: role="dialog", role="status"
+---
+3. Color Contrast & Improved Color Accessibility ✅
+Description: Ensures sufficient contrast between text and background (WCAG 2.1 Level AA minimum 4.5:1 ratio).
+Features:
+•	High Contrast Mode - Toggles maximum contrast (pure black text on white background)
+•	Dark Mode - Reduces eye strain in low-light environments with a dark color scheme
+•	Your base color palette already meets WCAG AA standards
+---
+4. Font Size Adjustment ✅
+Description: Users can increase or decrease font size to suit their vision needs.
+Options:
+•	A− Button - Reduces font to 85% (small)
+•	A+ Button - Increases font to 115% (large)
+•	Default displays as 100%
+•	Display shows current percentage
+---
+5. Text Spacing Enhancement ✅
+Description: Increases line height, letter spacing, and word spacing for users with dyslexia or visual processing disorders.
+Features:
+•	Line height increased to 2 (double spacing)
+•	Letter spacing increased to 0.15em
+•	Word spacing increased to 0.25em
+•	Applies to all text elements across the page
+---
+6. Reduce Motion ✅
+Description: Minimizes animations and transitions for users sensitive to motion or with vestibular disorders.
+Features:
+•	Disables all CSS animations (duration set to 0.01ms)
+•	Disables transitions (duration set to 0.01ms)
+•	Sets scroll-behavior: auto (no smooth scrolling)
+•	Prevents animation-related motion sickness
+---
+7. Enhanced Focus Indicator ✅
+Description: Makes keyboard focus more prominent and visible, critical for users relying on keyboard navigation.
+Features:
+•	4px solid outline in intense indigo color
+•	2px offset from element
+•	Applies to all interactive elements
+•	Meets WCAG 2.1 Level AAA focus visibility standards
+---
+8. Persistent Preferences ✅
+Description: User preferences are saved to localStorage and persist across all pages and sessions.
+Features:
+•	Settings stored in localStorage under a11y-preferences key
+•	Preferences automatically applied on page load
+•	Consistent experience across all site pages
+•	Reset to defaults button available
+---
+9. Responsive Web Design (Mobile Accessibility) ✅
+Description: Your site adapts to different screen sizes with touch-friendly targets.
+Features:
+•	Flexible Grid System - Products reflow: 1 column (mobile), 2-3 columns (tablet), 4+ columns (desktop)
+•	Touch-Friendly Targets - 44px minimum tap target size (accessibility button is 50px)
+•	Mobile-First Design - Media queries for 320px to 1920px+ screens
+•	Hamburger menu for mobile navigation
+---
+10. Semantic Form Structure ✅
+Description: Forms use proper semantic HTML for screen reader accessibility.
+Features:
+•	<label> elements properly associated with inputs via for attribute
+•	<fieldset> and <legend> for form grouping
+•	Required field indicators with aria-required="true"
+•	Input validation feedback
+•	Form field descriptions
+---
+11. Accessibility Preferences Modal ✅
+Description: User-friendly interface to control all accessibility options.
+Features:
+•	Organized into logical fieldsets
+•	Clear descriptions for each preference
+•	Checkboxes for on/off toggles
+•	Size adjustment buttons with visual feedback
+•	Reset to Defaults button
+•	Accessible to both keyboard and mouse users
+•	Modal dialog properly marked with role="dialog"
+---
+WCAG 2.1 Compliance Summary
+Your site addresses WCAG 2.1 Level AA requirements:
+Criterion	Status	Feature
+1.4.3 Contrast (Minimum)	✅	High Contrast Mode, Dark Mode
+1.4.4 Resize Text	✅	Font Size Adjustment (A+/A−)
+1.4.12 Text Spacing	✅	Increase Spacing option
+2.1.1 Keyboard	✅	Full keyboard navigation
+2.1.2 No Keyboard Trap	✅	All elements keyboard accessible
+2.4.3 Focus Order	✅	Logical focus sequence
+2.4.7 Focus Visible	✅	Enhanced Focus Indicator
+2.5.5 Target Size	✅	44px+ touch targets
+4.1.2 Name, Role, Value	✅	Semantic HTML + ARIA labels
+4.1.3 Status Messages	✅	Role="status" for announcements
+---
+
+
+
+
+
+
+
+*******************************************************
+
+⦁     Responsive Web Design:
+To receive full credit, you will need to include at least three RWD elements and rationales. Refer to Tutorials 2.4.6 and 2.4.7 for RWD.  
+
+1.	Mobile-First Responsive Design - Media queries adapt layout, typography, and spacing for different screen sizes (320px to 1920px+). Ensures usability on phones, tablets, and desktops.
+
+2.	Flexible Grid System - auto-fit with minmax() allows the product grid to reflow naturally. On mobile: 1 column, tablet: 2-3 columns, desktop: 4+ columns—without JavaScript.
+
+3.	Touch-Friendly Targets - Touch devices receive larger tap targets (44px minimum) to meet WCAG 2.1 Level AAA accessibility standards for mobile users.
+
+********************************************************
+
+
+
+
+
+
+Website Functionality
+
+⦁     Navigation Bar:
+<describe website functionality in detail here>
+
+⦁     Subscribe Feature:
+<describe website functionality in detail here>
+
+⦁     Add to Cart Feature:
+<describe website functionality in detail here>
+
+⦁     View Cart Feature:
+<describe website functionality in detail here>
+
+⦁     Contact Us Feature:
+<describe website functionality in detail here>
+
+Web Data Storage
+< Describe how your website’s data storage works in detail here>
+
+⦁     Shopping Cart Feature:
+< Describe how your Shopping Cart feature uses data storage in detail here>
+
+⦁     Contact Us Feature:
+< Describe how your Contact Us feature uses data storage in detail here>
+
+Customization
+<describe the custom page of your website in detail here>
+
+Screenshots of Rendered Webpages
+⦁     Homepage
+
+<Include the screenshot(s) for the Homepage>
+
+Homepage:
+
+Subscribe feature:
+
+Subscribe feature input validation:
+
+
+⦁     Gallery Page
+
+<Include the screenshot(s) for the Gallery page>
+
+Gallery page:
+
+Shopping cart—Add Item:
+
+Shopping cart—View Cart (after adding an item):
+
+Shopping cart—View Cart (after adding multiple items):
+
+Shopping cart—View Cart (alert message after “Clear Cart” button is clicked):
+
+Shopping cart—Process Order (alert after “Process Order” button is clicked):
+
+Shopping cart—Process Order (alert after the order is already processed):
+
+Shopping cart—Clear Cart (empty cart):
+
+Shopping cart—Clear Cart (alert window after clearing cart):
+
+SessionStorage (before processing order):
+
+SessionStorage (after processing order):
+
+
+⦁     About Us Page
+
+<Include the screenshot(s) for the About Us page>
+
+About Us page:
+
+Contact Us form:
+
+LocalStorage—after form submission:
+
+Contact Us form—input validation:
+
+
+⦁     Custom Page
+
+<Include the screenshot(s) for the custom page> 
+Description of Issues
+<include screenshots or paste code below and provide a description of the issue>

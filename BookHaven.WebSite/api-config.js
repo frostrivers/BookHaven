@@ -13,7 +13,8 @@ const ApiConfig = {
         BOOKS: '/api/book',
         AUTHORS: '/api/author',
         GENRES: '/api/genre',
-        USERS: '/api/user'
+        USERS: '/api/user',
+        SUBSCRIBERS: '/api/subscriber',
     },
 
     // Get full endpoint URL

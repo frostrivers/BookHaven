@@ -5,8 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shopping Cart - Book Haven Bookstore</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="accessibility.css">
 </head>
 <body>
+    <a href="#main-content" class="skip-to-main">Skip to main content</a>
     <header>
         <div class="logo-container">
             <img src="images/logo.png" alt="Book Haven Bookstore Logo" class="logo">
@@ -91,6 +93,9 @@
         </section>
     </main>
 
+<!-- Include Accessibility Component BEFORE script initialization -->
+<div id="accessibility-container"></div>
+
     <footer>
         <p>&copy; 2026 Book Haven Bookstore. All rights reserved.</p>
     </footer>
@@ -98,5 +103,20 @@
     <script src="api-config.js"></script>
     <script src="script.js"></script>
     <script src="cart.js"></script>
+    <script src="accessibility.js"></script>
+
+    <script>
+        // Load accessibility modal FIRST, then initialize
+        fetch('accessibility.html')
+            .then(response => response.text())
+            .then(html => {
+                const container = document.getElementById('accessibility-container');
+                container.innerHTML = html;
+                // Initialize AFTER HTML is loaded
+                setTimeout(() => a11yManager.init(), 100);
+            })
+            .catch(error => console.error('Failed to load accessibility.html:', error));
+    </script>
+
 </body>
 </html>

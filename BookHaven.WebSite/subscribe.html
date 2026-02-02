@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subscribe - Book Haven Bookstore</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="accessibility.css">
+</head>
+<body>
+    <a href="#main-content" class="skip-to-main">Skip to main content</a>
+    <header>
+        <div class="logo-container">
+            <img src="images/logo.png" alt="Book Haven Bookstore Logo" class="logo">
+            <h1>Book Haven Bookstore</h1>
+        </div>
+
+        <button class="hamburger"
+                id="hamburger"
+                aria-label="Toggle navigation menu"
+                aria-expanded="false"
+                aria-controls="nav-menu">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+        </button>
+        <nav id="nav-menu" class="nav-menu" aria-label="Main Navigation">
+            <ul>
+                <li><a href="index.html#home">Home</a></li>
+                <li><a href="index.html#about">About</a></li>
+                <li><a href="shop.html">Shop</a></li>
+                <li><a href="index.html#hours">Hours</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+                <li><a href="cart.html" class="cart-link">Cart <span id="cart-count" class="cart-count"></span></a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="subscribe-section">
+            <div class="subscribe-container">
+                <h2>Join Our Newsletter</h2>
+                <p class="subscribe-description">Be the first to know about new releases, exclusive offers, and literary recommendations.</p>
+
+                <form id="subscribe-form" class="subscribe-form">
+                    <div class="form-group">
+                        <label for="sub-name">Full Name *</label>
+                        <input type="text"
+                               id="sub-name"
+                               name="name"
+                               required
+                               aria-label="Full Name"
+                               placeholder="John Doe">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="sub-email">Email Address *</label>
+                        <input type="email"
+                               id="sub-email"
+                               name="email"
+                               required
+                               aria-label="Email Address"
+                               placeholder="your.email@example.com">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="sub-phone">Phone Number (Optional)</label>
+                        <input type="tel"
+                               id="sub-phone"
+                               name="phone"
+                               aria-label="Phone Number"
+                               placeholder="(555) 123-4567">
+                    </div>
+
+                    <div class="form-group">
+                        <fieldset>
+                            <legend>Preferences:</legend>
+                            <div class="checkbox-group">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" name="preferences" value="newReleases" checked>
+                                    New Releases
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" name="preferences" value="recommendations" checked>
+                                    Recommendations
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" name="preferences" value="promotions" checked>
+                                    Promotions & Discounts
+                                </label>
+                            </div>
+                        </fieldset>
+                    </div>
+
+                    <button type="submit" class="cta-button submit-btn" aria-label="Complete subscription">Subscribe</button>
+                </form>
+
+                <div id="subscribe-message" class="subscribe-message"></div>
+            </div>
+        </section>
+    </main>
+
+<!-- Include Accessibility Component BEFORE script initialization -->
+<div id="accessibility-container"></div>
+
+    <footer>
+        <p>&copy; 2026 Book Haven Bookstore. All rights reserved.</p>
+    </footer>
+
+    <script src="api-config.js"></script>
+    <script src="subscribe.js"></script>
+    <script src="accessibility.js"></script>
+
+    <!-- Include Accessibility Component -->
+    <div id="accessibility-container"></div>
+    <script>
+        // Load accessibility modal when page loads
+        fetch('accessibility.html')
+            .then(response => response.text())
+            .then(html => {
+                const container = document.getElementById('accessibility-container');
+                container.innerHTML = html;
+            });
+    </script>
+</body>
+</html>

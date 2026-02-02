@@ -207,6 +207,7 @@ header {
     gap: 10px;
     flex: 1;
     min-width: 200px;
+    position: relative;
 }
 
     .logo-container h1 {
@@ -219,6 +220,27 @@ header {
 .logo {
     width: clamp(60px, 10vw, 80px);
     height: auto;
+}
+
+/* Subscribe Button in Header */
+.subscribe-btn {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 10px 24px;
+    background-color: #d4a373;
+    color: #2c1810;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: 600;
+    border: 2px solid #d4a373;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.subscribe-btn:hover {
+    background-color: #2c1810;
+    color: #d4a373;
+    border-color: #d4a373;
 }
 
 /* ===== HAMBURGER MENU ===== */
@@ -987,7 +1009,7 @@ mark {
 }
 
     .summary-section h3 {
-        color: var(--inkwell-blue);
+        color: #2c1810;
         margin-top: 0;
         margin-bottom: 15px;
         font-size: 1.1rem;
@@ -1116,89 +1138,400 @@ mark {
         width: 100%;
     }
 
-/* ===== RESPONSIVE DESIGN ===== */
-/* Tablet Responsive Design */
-@media (max-width: 768px) {
-    h1 {
-        font-size: clamp(1.5rem, 3vw, 1.875rem);
-    }
+/* ===== NEWSLETTER SUBSCRIPTION STYLES ===== */
 
-    h2 {
-        font-size: clamp(1.25rem, 2.5vw, 1.5rem);
-    }
+.newsletter-signup {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem;
+    background: linear-gradient(135deg, var(--inkwell-blue), var(--intense-indigo));
+    border-radius: 8px;
+    gap: 0.5rem;
+    margin: 0 1rem;
+}
 
+.newsletter-form {
+    display: flex;
+    gap: 0.5rem;
+    width: 100%;
+    max-width: 500px;
+    flex-wrap: wrap;
+}
+
+.newsletter-input {
+    flex: 1;
+    min-width: 150px;
+    padding: 0.75rem 1rem;
+    border: 2px solid var(--parchment-white);
+    border-radius: 4px;
+    font-family: var(--body-font);
+    font-size: var(--body-size);
+    background-color: var(--parchment-white);
+    color: var(--bookish-black);
+    transition: border-color 0.3s ease;
+}
+
+.newsletter-input::placeholder {
+    color: var(--aged-gold);
+    opacity: 0.7;
+}
+
+.newsletter-input:focus {
+    outline: none;
+    border-color: var(--aged-gold);
+    box-shadow: 0 0 4px rgba(199, 182, 94, 0.5);
+}
+
+.newsletter-btn {
+    padding: 0.75rem 1.5rem;
+    background-color: var(--aged-gold);
+    color: var(--bookish-black);
+    border: 2px solid var(--aged-gold);
+    border-radius: 4px;
+    font-family: var(--body-strong-font);
+    font-weight: var(--body-strong-weight);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+}
+
+.newsletter-btn:hover {
+    background-color: var(--parchment-white);
+    color: var(--intense-indigo);
+    transform: translateY(-2px);
+}
+
+.newsletter-btn:active {
+    transform: translateY(0);
+}
+
+.subscribe-section {
+    padding: 40px 20px;
+    background: linear-gradient(135deg, #f5f5f0 0%, #e8e3dc 100%);
+    min-height: calc(100vh - 300px);
+}
+
+.subscribe-container {
+    max-width: 600px;
+    margin: 0 auto;
+    background: white;
+    padding: 40px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.subscribe-container h2 {
+    color: #2c1810;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.subscribe-description {
+    text-align: center;
+    color: #666;
+    margin-bottom: 30px;
+    font-size: 16px;
+}
+
+.subscribe-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    font-weight: 600;
+    color: #2c1810;
+    margin-bottom: 8px;
+}
+
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group input[type="tel"] {
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    font-family: inherit;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: #d4a373;
+    box-shadow: 0 0 5px rgba(212, 163, 115, 0.3);
+}
+
+fieldset {
+    border: none;
+    padding: 0;
+    margin: 0;
+}
+
+legend {
+    font-weight: 600;
+    color: #2c1810;
+    margin-bottom: 12px;
+    padding: 0;
+}
+
+.checkbox-group {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.checkbox-label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    font-weight: 400;
+    gap: 12px;
+    font-size: 16px;
+    color: #2c1810;
+}
+
+.checkbox-label input[type="checkbox"] {
+    margin: 0;
+    cursor: pointer;
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+    accent-color: var(--intense-indigo);
+}
+
+.submit-btn {
+    align-self: center;
+    width: 200px;
+    margin-top: 10px;
+}
+
+.subscribe-message {
+    text-align: center;
+    padding: 12px;
+    border-radius: 4px;
+    margin-top: 10px;
+    display: none;
+}
+
+.subscribe-message.success {
+    display: block;
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.subscribe-message.error {
+    display: block;
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+/* ===== SUBSCRIPTION CONFIRMATION MODAL ===== */
+.subscription-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 3000;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.subscription-modal-overlay.show {
+    opacity: 1;
+}
+
+.subscription-modal-content {
+    background: white;
+    border-radius: 12px;
+    padding: 40px;
+    max-width: 500px;
+    width: 90%;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    animation: slideUp 0.4s ease;
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(30px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.modal-success-icon {
+    width: 80px;
+    height: 80px;
+    background-color: #27ae60;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+    font-size: 3rem;
+    color: white;
+    font-weight: bold;
+    box-shadow: 0 4px 15px rgba(39, 174, 96, 0.3);
+}
+
+.subscription-modal-content h2 {
+    color: var(--inkwell-blue);
+    margin: 20px 0 10px 0;
+    font-size: 1.8rem;
+    font-family: var(--title-large-font);
+}
+
+.modal-greeting {
+    color: var(--inkwell-blue);
+    font-size: 1.1rem;
+    margin: 15px 0 10px 0;
+    font-family: var(--body-font);
+}
+
+.modal-message {
+    color: #555;
+    font-size: 1rem;
+    margin: 15px 0;
+    line-height: 1.6;
+    font-family: var(--body-font);
+}
+
+.modal-confirmation {
+    color: #27ae60;
+    font-weight: 600;
+    font-size: 0.95rem;
+    margin: 15px 0;
+    font-family: var(--body-strong-font);
+}
+
+.modal-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 30px;
+}
+
+.modal-actions .cta-button {
+    width: 100%;
+    margin: 0;
+}
+
+.modal-actions .cta-button.secondary {
+    background-color: var(--aged-gold);
+    color: var(--inkwell-blue);
+}
+
+.modal-actions .cta-button.secondary:hover {
+    background-color: var(--intense-indigo);
+    color: var(--parchment-white);
+}
+
+/* ===== RESPONSIVE DESIGN - MOBILE FIRST ===== */
+
+/* Small Devices (Mobile phones: 320px - 640px) */
+@media (max-width: 640px) {
     header {
-        flex-wrap: nowrap;
+        flex-direction: column;
+        padding: 15px;
+        gap: 15px;
+    }
+
+    .logo-container {
+        width: 100%;
+        justify-content: space-between;
+        min-width: auto;
+    }
+
+    .logo-container h1 {
+        font-size: 1.3rem;
+    }
+
+    .subscribe-btn {
+        padding: 8px 16px;
+        font-size: 0.9rem;
+        margin-top: 0;
     }
 
     .hamburger {
         display: flex;
     }
 
-    .logo-container {
-        flex: 1;
-    }
-
-    nav {
-        position: absolute;
-        top: 100%;
-        left: 0;
-        right: 0;
-        background-color: var(--inkwell-blue);
-        max-height: 0;
-        overflow: hidden;
-        transition: max-height 0.3s ease;
-    }
-
-        nav.active {
-            max-height: 300px;
-        }
-
     .nav-menu {
+        display: none;
+        width: 100%;
         flex-direction: column;
+    }
+
+    .nav-menu.active {
+        display: flex;
     }
 
     nav ul {
         flex-direction: column;
-        gap: 0;
+        gap: 10px;
         justify-content: flex-start;
     }
 
-    nav li {
-        width: 100%;
-    }
-
     nav a {
-        display: block;
-        padding: 15px 20px;
-        text-align: left;
-        border-bottom: 1px solid rgba(255, 247, 238, 0.1);
+        font-size: 0.95rem;
+        padding: 12px;
     }
-
-        nav a:hover {
-            background-color: rgba(255, 247, 238, 0.1);
-        }
 
     main {
         padding: 15px;
+        max-width: 100%;
     }
 
     .hero {
-        padding: 20px 15px;
+        padding: 20px;
+        margin-bottom: 20px;
+    }
+
+    .hero h2 {
+        font-size: 1.5rem;
+    }
+
+    .hero p {
+        font-size: 0.95rem;
+    }
+
+    .cta-button {
+        padding: 10px 18px;
+        font-size: 0.9rem;
+        margin: 8px 3px;
     }
 
     .books-grid {
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        grid-template-columns: 1fr;
         gap: 15px;
     }
 
-    .search-container {
-        padding: 15px;
+    .product-card {
+        padding: 12px;
     }
 
-    .search-wrapper {
-        flex-direction: column;
-        gap: 8px;
+    .product-image {
+        height: 150px;
+    }
+
+    .product-card h3 {
+        font-size: 1.1rem;
     }
 
     .pagination-controls {
@@ -1207,44 +1540,47 @@ mark {
     }
 
     .pagination-buttons {
-        gap: 6px;
-    }
-
-    .page-numbers {
-        gap: 3px;
+        gap: 4px;
     }
 
     .pagination-btn,
     .page-number {
         padding: 8px 10px;
-        font-size: 0.9rem;
+        font-size: 0.85rem;
         min-width: 40px;
     }
 
-    section {
-        margin-bottom: 30px;
+    .page-size-control {
+        flex-direction: column;
+        gap: 10px;
     }
 
+    .search-bar {
+        font-size: 0.95rem;
+    }
+
+    /* Cart Styles - Mobile */
     .cart-content {
         grid-template-columns: 1fr;
+        gap: 20px;
     }
 
     .cart-summary {
         position: static;
+        top: auto;
     }
 
     .cart-table {
         font-size: 0.85rem;
     }
 
-        .cart-table th,
-        .cart-table td {
-            padding: 10px;
-        }
+    .cart-table th,
+    .cart-table td {
+        padding: 10px;
+    }
 
     .quantity-controls {
-        flex-direction: column;
-        gap: 4px;
+        gap: 5px;
     }
 
     .qty-btn {
@@ -1254,196 +1590,200 @@ mark {
     }
 
     .qty-input {
-        width: 45px;
-        padding: 4px;
-    }
-}
-
-/* Mobile Responsive Design */
-@media (max-width: 480px) {
-    h1 {
-        font-size: 1.3rem;
-    }
-
-    h2 {
-        font-size: 1.25rem;
-    }
-
-    h3 {
-        font-size: 1rem;
-    }
-
-    p {
-        font-size: 0.95rem;
-    }
-
-    header {
-        padding: 15px;
-    }
-
-    .logo-container {
-        gap: 8px;
-    }
-
-        .logo-container h1 {
-            font-size: 1.3rem;
-        }
-
-    nav.active {
-        max-height: 400px;
-    }
-
-    main {
-        padding: 10px;
-    }
-
-    .hero {
-        padding: 15px 10px;
-        margin-bottom: 25px;
-    }
-
-        .hero h2 {
-            font-size: 1.3rem;
-        }
-
-        .hero p {
-            font-size: 0.95rem;
-            margin-bottom: 20px;
-        }
-
-    .cta-button {
-        padding: 10px 18px;
-        font-size: 0.85rem;
-        margin: 8px 3px;
-    }
-
-    #about, #hours, #contact {
-        padding-left: 15px;
-        margin-bottom: 25px;
-    }
-
-    form {
-        gap: 12px;
-        margin: 15px 0;
-    }
-
-    input, textarea {
-        padding: 10px;
-        font-size: 1rem;
-    }
-
-    .books-grid {
-        grid-template-columns: 1fr;
-        gap: 15px;
-    }
-
-    .search-container {
-        padding: 12px;
-        margin: 20px 0;
-    }
-
-    .search-bar {
-        font-size: 1rem;
-    }
-
-    .clear-btn {
-        padding: 10px 14px;
-    }
-
-    .pagination-controls {
-        padding: 12px;
-        gap: 12px;
-    }
-
-    .pagination-buttons {
-        flex-direction: column;
-        gap: 8px;
-    }
-
-    .page-numbers {
-        width: 100%;
-        justify-content: center;
-    }
-
-    .pagination-btn,
-    .page-number {
-        flex: 1;
-        min-width: auto;
-        padding: 10px 8px;
-        font-size: 0.85rem;
-    }
-
-    .page-size-control {
-        flex-direction: column;
-        gap: 8px;
-        width: 100%;
-    }
-
-        .page-size-control label {
-            width: 100%;
-            text-align: center;
-        }
-
-    #page-size {
-        width: 100%;
-    }
-
-    footer {
-        padding: 15px 10px;
-    }
-
-    .cart-table {
-        font-size: 0.8rem;
-    }
-
-        .cart-table th,
-        .cart-table td {
-            padding: 8px;
-        }
-
-    .item-title {
-        font-size: 0.9rem;
-    }
-
-    .quantity-controls {
-        gap: 3px;
-    }
-
-    .qty-btn {
-        width: 26px;
-        height: 26px;
-        font-size: 0.85rem;
-    }
-
-    .qty-input {
         width: 40px;
-        padding: 3px;
         font-size: 0.85rem;
     }
 
-    .remove-btn {
-        padding: 6px 10px;
-        font-size: 0.8rem;
-    }
-
-    .summary-section h3 {
-        font-size: 1rem;
-    }
-
-    .summary-row {
-        font-size: 0.9rem;
-    }
-
-        .summary-row.total {
-            font-size: 1rem;
-        }
-
-    .checkout-modal {
+    /* Subscribe Form - Mobile */
+    .subscribe-container {
         padding: 20px;
         margin: 20px;
     }
 
-        .checkout-modal h3 {
-            font-size: 1.2rem;
-        }
+    .subscribe-container h2 {
+        font-size: 1.5rem;
+    }
+
+    .checkbox-group {
+        gap: 12px;
+    }
+
+    .checkbox-label {
+        font-size: 0.95rem;
+    }
+
+    .submit-btn {
+        width: 100%;
+    }
+
+    /* Newsletter */
+    .newsletter-form {
+        flex-wrap: wrap;
+    }
+
+    .newsletter-input {
+        min-width: 100%;
+    }
+
+    .newsletter-btn {
+        width: 100%;
+    }
+
+    /* Footer */
+    footer {
+        font-size: 0.8rem;
+    }
+
+    section {
+        margin-bottom: 25px;
+    }
+}
+
+/* Medium Devices (Tablets: 641px - 1024px) */
+@media (min-width: 641px) and (max-width: 1024px) {
+    header {
+        flex-wrap: wrap;
+        padding: 15px;
+    }
+
+    .logo-container {
+        flex-basis: 100%;
+        margin-bottom: 10px;
+    }
+
+    .hamburger {
+        display: flex;
+    }
+
+    .nav-menu {
+        flex-basis: 100%;
+    }
+
+    nav ul {
+        flex-wrap: wrap;
+        gap: 15px;
+    }
+
+    main {
+        padding: 20px;
+        max-width: 100%;
+    }
+
+    .books-grid {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 15px;
+    }
+
+    .product-card {
+        padding: 12px;
+    }
+
+    .product-image {
+        height: 180px;
+    }
+
+    /* Cart - Tablet */
+    .cart-content {
+        grid-template-columns: 1fr 300px;
+    }
+
+    .cart-table {
+        font-size: 0.9rem;
+    }
+
+    .pagination-controls {
+        flex-wrap: wrap;
+    }
+
+    .page-size-control {
+        flex-direction: row;
+        gap: 12px;
+    }
+}
+
+/* Large Devices (Desktop: 1025px and above) */
+@media (min-width: 1025px) {
+    header {
+        flex-wrap: nowrap;
+        padding: 20px;
+    }
+
+    .logo-container {
+        flex: 1;
+        min-width: 250px;
+    }
+
+    .hamburger {
+        display: none;
+    }
+
+    .nav-menu {
+        display: flex;
+    }
+
+    nav ul {
+        gap: 25px;
+        flex-wrap: nowrap;
+    }
+
+    main {
+        padding: 30px;
+    }
+
+    .books-grid {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+    }
+
+    .product-image {
+        height: 200px;
+    }
+
+    /* Cart - Desktop */
+    .cart-content {
+        grid-template-columns: 1fr 350px;
+        gap: 30px;
+    }
+
+    .cart-summary {
+        position: sticky;
+        top: 120px;
+    }
+}
+
+/* Extra Large Devices (4K: 1920px and above) */
+@media (min-width: 1920px) {
+    main {
+        max-width: 1400px;
+    }
+
+    .books-grid {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    }
+
+    h1 {
+        font-size: 3rem;
+    }
+
+    h2 {
+        font-size: 2.2rem;
+    }
+}
+
+/* Touch Device Optimization */
+@media (hover: none) and (pointer: coarse) {
+    button,
+    .cta-button,
+    a {
+        min-height: 44px;
+        min-width: 44px;
+        padding: 12px 16px;
+    }
+
+    .qty-btn,
+    .pagination-btn,
+    .page-number {
+        min-height: 44px;
+        min-width: 44px;
+    }
 }
