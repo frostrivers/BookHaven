@@ -9,17 +9,17 @@ https://walmart.workforceedge.com/
 search bar
 working shop Page
 data storage on customers 
-pictures crash stackblitzs and make me lose 2 hours of progress because a damn png was too pngy 
-get rid of stackblitz, cost money.
-using to use Visual Studio Community Edition
+pictures that dont crash stackblitzs and make me lose 2 hours of progress because a damn png was too pngy 
 a contact page where you can 'sign up"
 about us page with more details 
 
+Test
 
 
 https://github.com/frostrivers/BookHaven
 deadrunner.0@Gmail.com
+H!22
 
-
+CANCEL Co-Pilot Subscription
 
 Why does it keep asking for my Name?
