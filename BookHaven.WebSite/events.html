@@ -1,0 +1,580 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upcoming Events - Book Haven Bookstore</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="accessibility.css">
+    <style>
+        .events-container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        .events-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+            .events-header h2 {
+                font-size: 2.5rem;
+                color: #333;
+                margin-bottom: 0.5rem;
+            }
+
+            .events-header p {
+                font-size: 1.1rem;
+                color: #666;
+            }
+
+        .filters-section {
+            background: #f9f9f9;
+            padding: 2rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .filter-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+            .filter-group label {
+                font-weight: 600;
+                color: #333;
+                font-size: 0.9rem;
+            }
+
+            .filter-group select,
+            .search-input {
+                padding: 0.75rem;
+                border: 1px solid #ddd;
+                border-radius: 4px;
+                font-size: 1rem;
+                min-width: 200px;
+            }
+
+                .filter-group select:focus,
+                .search-input:focus {
+                    outline: none;
+                    border-color: #8B4513;
+                    box-shadow: 0 0 5px rgba(139, 69, 19, 0.3);
+                }
+
+        .search-input {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .reset-filters-btn {
+            padding: 0.75rem 1.5rem;
+            background-color: #ddd;
+            color: #333;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: background-color 0.3s;
+        }
+
+            .reset-filters-btn:hover {
+                background-color: #bbb;
+            }
+
+        .events-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .event-card {
+            background: white;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            display: flex;
+            flex-direction: column;
+        }
+
+            .event-card:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            }
+
+        .event-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            background-color: #f0f0f0;
+        }
+
+        .event-content {
+            padding: 1.5rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .event-type {
+            display: inline-block;
+            background-color: #8B4513;
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            width: fit-content;
+        }
+
+        .event-title {
+            font-size: 1.3rem;
+            color: #333;
+            margin: 0.5rem 0;
+            font-weight: 700;
+        }
+
+        .event-description {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            flex-grow: 1;
+        }
+
+        .event-details {
+            font-size: 0.85rem;
+            color: #666;
+            margin: 0.5rem 0;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+            .event-details strong {
+                color: #333;
+            }
+
+        .capacity-bar {
+            width: 100%;
+            height: 8px;
+            background-color: #e0e0e0;
+            border-radius: 4px;
+            overflow: hidden;
+            margin: 0.75rem 0;
+        }
+
+        .capacity-filled {
+            height: 100%;
+            background-color: #8B4513;
+            transition: width 0.3s;
+        }
+
+        .event-actions {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .register-btn,
+        .details-btn {
+            flex: 1;
+            padding: 0.75rem;
+            border: none;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .register-btn {
+            background-color: #8B4513;
+            color: white;
+        }
+
+            .register-btn:hover:not(:disabled) {
+                background-color: #6b3410;
+            }
+
+            .register-btn:disabled {
+                background-color: #ccc;
+                cursor: not-allowed;
+            }
+
+        .details-btn {
+            background-color: #f0f0f0;
+            color: #333;
+            border: 1px solid #ddd;
+        }
+
+            .details-btn:hover {
+                background-color: #e0e0e0;
+            }
+
+        .no-events {
+            text-align: center;
+            padding: 3rem 1rem;
+            color: #666;
+        }
+
+            .no-events p {
+                font-size: 1.1rem;
+            }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            overflow-y: auto;
+        }
+
+            .modal.active {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+        .modal-content {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 8px;
+            width: 90%;
+            max-width: 600px;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            border-bottom: 2px solid #f0f0f0;
+            padding-bottom: 1rem;
+        }
+
+            .modal-header h2 {
+                margin: 0;
+                color: #333;
+                font-size: 1.8rem;
+            }
+
+        .close-btn {
+            background: none;
+            border: none;
+            font-size: 2rem;
+            cursor: pointer;
+            color: #666;
+        }
+
+            .close-btn:hover {
+                color: #333;
+            }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+            .form-group label {
+                display: block;
+                font-weight: 600;
+                color: #333;
+                margin-bottom: 0.5rem;
+            }
+
+            .form-group input,
+            .form-group textarea {
+                width: 100%;
+                padding: 0.75rem;
+                border: 1px solid #ddd;
+                border-radius: 4px;
+                font-size: 1rem;
+                font-family: inherit;
+            }
+
+            .form-group textarea {
+                resize: vertical;
+                min-height: 100px;
+            }
+
+                .form-group input:focus,
+                .form-group textarea:focus {
+                    outline: none;
+                    border-color: #8B4513;
+                    box-shadow: 0 0 5px rgba(139, 69, 19, 0.3);
+                }
+
+        .submit-btn {
+            background-color: #8B4513;
+            color: white;
+            padding: 0.75rem 2rem;
+            border: none;
+            border-radius: 4px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            width: 100%;
+        }
+
+            .submit-btn:hover {
+                background-color: #6b3410;
+            }
+
+        .admin-section {
+            background: #f9f9f9;
+            padding: 2rem;
+            border-radius: 8px;
+            margin-top: 3rem;
+            border: 2px dashed #8B4513;
+        }
+
+            .admin-section h3 {
+                color: #333;
+                margin-top: 0;
+            }
+
+        .admin-actions {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .admin-btn {
+            padding: 0.75rem 1.5rem;
+            background-color: #8B4513;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+            .admin-btn:hover {
+                background-color: #6b3410;
+            }
+
+        .message {
+            padding: 1rem;
+            margin-bottom: 1rem;
+            border-radius: 4px;
+            display: none;
+        }
+
+            .message.success {
+                background-color: #d4edda;
+                color: #155724;
+                border: 1px solid #c3e6cb;
+            }
+
+            .message.error {
+                background-color: #f8d7da;
+                color: #721c24;
+                border: 1px solid #f5c6cb;
+            }
+
+            .message.active {
+                display: block;
+            }
+
+        @media (max-width: 768px) {
+            .events-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .filters-section {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .filter-group select,
+            .search-input {
+                min-width: 100%;
+            }
+
+            .events-header h2 {
+                font-size: 1.8rem;
+            }
+
+            .modal-content {
+                width: 95%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <a href="#main-content" class="skip-to-main">Skip to main content</a>
+    <header>
+        <div class="logo-container">
+            <img src="images/logo.png" alt="Book Haven Bookstore Logo" class="logo">
+            <h1>Book Haven Bookstore</h1>
+            <a href="subscribe.html" class="subscribe-btn" aria-label="Subscribe to our newsletter">Subscribe</a>
+        </div>
+        <button class="hamburger" id="hamburger" aria-label="Toggle navigation menu" aria-expanded="false"
+                aria-controls="nav-menu">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+        </button>
+        <nav id="nav-menu" class="nav-menu" aria-label="Main Navigation">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="shop.html">Shop</a></li>
+                <li><a href="events.html" aria-current="page">Events</a></li>
+                <li><a href="subscribe.html">Subscribe</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main id="main-content">
+        <section class="events-container">
+            <div class="events-header">
+                <h2>Upcoming Events</h2>
+                <p>Join us for exciting book gatherings, trading card tournaments, and gaming events!</p>
+            </div>
+
+            <div id="message" class="message"></div>
+
+            <div class="filters-section">
+                <input type="text" id="searchInput" class="search-input" placeholder="Search events by name or location...">
+                <div class="filter-group">
+                    <label for="eventTypeFilter">Event Type:</label>
+                    <select id="eventTypeFilter">
+                        <option value="">All Types</option>
+                    </select>
+                </div>
+                <button class="reset-filters-btn" onclick="resetFilters()">Reset Filters</button>
+            </div>
+
+            <div id="eventsGrid" class="events-grid">
+                <!-- Events will be loaded here -->
+            </div>
+
+            <div id="noEvents" class="no-events" style="display: none;">
+                <p>No events match your criteria. Check back soon for new events!</p>
+            </div>
+        </section>
+
+        <!-- Admin Section -->
+        <section class="events-container">
+            <div class="admin-section">
+                <h3>📋 Admin Panel</h3>
+                <p>Manage events from here. Note: In production, add proper authentication.</p>
+                <div class="admin-actions">
+                    <button class="admin-btn" onclick="openCreateEventModal()">+ Create New Event</button>
+                    <button class="admin-btn" onclick="loadEventsAsAdmin()">Load All Events</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Registration Modal -->
+    <div id="registrationModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Register for Event</h2>
+                <button class="close-btn" onclick="closeModal('registrationModal')">&times;</button>
+            </div>
+            <form onsubmit="registerForEvent(event)">
+                <div class="form-group">
+                    <label for="regName">Full Name:</label>
+                    <input type="text" id="regName" required>
+                </div>
+                <div class="form-group">
+                    <label for="regEmail">Email:</label>
+                    <input type="email" id="regEmail" required>
+                </div>
+                <button type="submit" class="submit-btn">Register</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Event Details Modal -->
+    <div id="detailsModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="detailsTitle"></h2>
+                <button class="close-btn" onclick="closeModal('detailsModal')">&times;</button>
+            </div>
+            <div id="detailsBody"></div>
+        </div>
+    </div>
+
+    <!-- Create Event Modal -->
+    <div id="createEventModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Create New Event</h2>
+                <button class="close-btn" onclick="closeModal('createEventModal')">&times;</button>
+            </div>
+            <form onsubmit="createEvent(event)">
+                <div class="form-group">
+                    <label for="eventName">Event Name:</label>
+                    <input type="text" id="eventName" required>
+                </div>
+                <div class="form-group">
+                    <label for="eventType">Event Type:</label>
+                    <input type="text" id="eventType" placeholder="e.g., Book Club, Trading Card Game, Gaming" required>
+                </div>
+                <div class="form-group">
+                    <label for="eventDate">Event Date & Time:</label>
+                    <input type="datetime-local" id="eventDate" required>
+                </div>
+                <div class="form-group">
+                    <label for="eventLocation">Location:</label>
+                    <input type="text" id="eventLocation" required>
+                </div>
+                <div class="form-group">
+                    <label for="eventCapacity">Capacity:</label>
+                    <input type="number" id="eventCapacity" min="1" required>
+                </div>
+                <div class="form-group">
+                    <label for="eventImage">Image URL (optional)</label>
+                    <input type="url" id="eventImage" placeholder="https://example.com/image.jpg">
+                </div>
+
+                <div class="form-group">
+                    <label for="eventImageFile">Upload Card Image</label>
+                    <input type="file" id="eventImageFile" accept="image/*">
+                    <small style="color: #666; display: block; margin-top: 0.5rem;">Supported formats: JPG, PNG, GIF, WebP</small>
+                </div>
+                <div class="form-group">
+                    <label for="eventDescription">Description:</label>
+                    <textarea id="eventDescription" required></textarea>
+                </div>
+                <button type="submit" class="submit-btn">Create Event</button>
+            </form>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Book Haven Bookstore. All rights reserved.</p>
+    </footer>
+
+    <script src="api-config.js"></script>
+    <script src="events.js"></script>
+</body>
+
+</html>

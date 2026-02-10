@@ -3,6 +3,7 @@ using System;
 using BookHaven.API.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BookHaven.API.Migrations
 {
     [DbContext(typeof(BookHavenDbContext))]
-    partial class BookHavenDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260210054229_AddEventsTables")]
+    partial class AddEventsTables
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "10.0.0");
@@ -51,10 +54,6 @@ namespace BookHaven.API.Migrations
 
                     b.Property<int>("Capacity")
                         .HasColumnType("INTEGER");
-
-                    b.Property<string>("CardImage")
-                        .IsRequired()
-                        .HasColumnType("LONGTEXT");
 
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("TEXT");

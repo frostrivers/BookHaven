@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Book Haven Bookstore</title>
+    <title>Book Haven Bookstore - Your Literary Escape Awaits</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="accessibility.css">
 </head>
@@ -26,43 +26,112 @@
         <nav id="nav-menu" class="nav-menu" aria-label="Main Navigation">
             <ul>
                 <li><a href="#home">Home</a></li>
-                <li><a href="#about">About</a></li>
+                <li><a href="#featured">Featured</a></li>
                 <li><a href="shop.html">Shop</a></li>
-                <li><a href="#hours">Hours</a></li>
+                <li><a href="events.html">Events</a></li>
+                <li><a href="#about">About</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
         </nav>
     </header>
 
     <main id="main-content">
-        <section id="home" class="hero" aria-label="Welcome section">
-            <h2>Welcome to Book Haven</h2>
-            <p>Discover a world of words, knowledge, and inspiration. Explore our collection online or visit us in-store.
-            </p>
-            <a href="#about" class="cta-button">Learn More</a>
-            <a href="shop.html" class="cta-button">Browse Shop</a>
+        <!-- HERO SECTION WITH DRAMATIC IMAGERY -->
+        <section id="home" class="hero-enhanced" aria-label="Welcome section with hero imagery">
+            <div class="hero-content">
+                <h2 class="hero-title">Your Literary Escape Awaits</h2>
+                <p class="hero-subtitle">Immerse yourself in captivating stories, timeless classics, and literary gems that spark imagination</p>
+                <div class="hero-buttons">
+                    <a href="shop.html" class="cta-button cta-primary">Explore Collection</a>
+                    <a href="#featured" class="cta-button cta-secondary">See Featured Picks</a>
+                </div>
+            </div>
+            <div class="hero-image-background" role="img" aria-label="Decorative bookshelf background"></div>
         </section>
 
-        <section id="about" aria-label="About Book Haven">
-            <h2>About Us</h2>
-            <p>Book Haven Bookstore is a local treasure for book enthusiasts, offering a diverse selection of books,
-                magazines, journals, and office supplies. Our mission is to foster a love of reading while building a
-                vibrant literary community.</p>
+        <!-- FEATURED BOOKS SECTION -->
+        <section id="featured" class="featured-section" aria-label="Featured books spotlight">
+            <div class="section-header">
+                <h2>Featured This Month</h2>
+                <p>Handpicked treasures from our expert collection</p>
+            </div>
+            
+            <div id="featured-books-grid" class="featured-books-grid">
+                <!-- Featured books will be loaded here dynamically -->
+                <div class="loading-message">Loading featured books...</div>
+            </div>
+
+            <div class="featured-cta">
+                <a href="shop.html" class="cta-button cta-large">Browse All Books</a>
+            </div>
         </section>
 
-        <section id="hours" aria-label="Hours of operation">
-            <h2>Hours of Operation</h2>
-            <ul>
-                <li>Monday–Friday: 9 a.m. – 8 p.m.</li>
-                <li>Saturday: 10 a.m. – 6 p.m.</li>
-                <li>Sunday: 11 a.m. – 5 p.m.</li>
-            </ul>
+        <!-- WHY CHOOSE US SECTION -->
+        <section class="why-choose-us" aria-label="Why choose Book Haven">
+            <h2>Why Book Haven?</h2>
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <div class="benefit-icon">🎯</div>
+                    <h3>Expert Curation</h3>
+                    <p>Handpicked selections from book lovers who know quality literature.</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">🚚</div>
+                    <h3>Fast Shipping</h3>
+                    <p>Quick delivery on your online orders right to your doorstep.</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">👥</div>
+                    <h3>Community</h3>
+                    <p>Join a vibrant community of book lovers and fellow readers.</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">💬</div>
+                    <h3>Recommendations</h3>
+                    <p>Personalized book recommendations tailored to your interests.</p>
+                </div>
+            </div>
         </section>
 
-        <section id="contact" aria-label="Contact us form">
+        <!-- ABOUT SECTION -->
+        <section id="about" class="about-section" aria-label="About Book Haven">
+            <div class="about-content">
+                <h2>About Book Haven</h2>
+                <p>Book Haven Bookstore is a local treasure for book enthusiasts, offering a diverse selection of books, magazines, journals, and office supplies. Since our founding, we've been dedicated to fostering a love of reading while building a vibrant literary community.</p>
+                <p>Whether you're seeking the latest bestseller, a timeless classic, or a hidden literary gem, our knowledgeable staff is here to help you find your next great read.</p>
+                <a href="#contact" class="cta-button">Get in Touch</a>
+            </div>
+            <div class="about-image" role="img" aria-label="Cozy bookstore interior"></div>
+        </section>
+
+        <!-- HOURS SECTION -->
+        <section id="hours" class="hours-section" aria-label="Hours of operation">
+            <h2>Visit Us</h2>
+            <div class="hours-grid">
+                <div class="hours-card">
+                    <h3>Store Hours</h3>
+                    <ul class="hours-list">
+                        <li><span>Monday–Friday:</span> <strong>9 a.m. – 8 p.m.</strong></li>
+                        <li><span>Saturday:</span> <strong>10 a.m. – 6 p.m.</strong></li>
+                        <li><span>Sunday:</span> <strong>11 a.m. – 5 p.m.</strong></li>
+                    </ul>
+                </div>
+                <div class="hours-card">
+                    <h3>Customer Support</h3>
+                    <ul class="hours-list">
+                        <li><span>Email:</span> <strong>hello@bookhaven.com</strong></li>
+                        <li><span>Phone:</span> <strong>(555) 123-4567</strong></li>
+                        <li><span>Response Time:</span> <strong>Within 24 hours</strong></li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- CONTACT SECTION -->
+        <section id="contact" class="contact-section" aria-label="Contact us form">
             <h2>Get in Touch</h2>
-            <p>Have questions or need recommendations? Reach out to us!</p>
-            <form action="#" method="post" aria-label="Contact form">
+            <p class="contact-intro">Have questions or need personalized book recommendations? We'd love to hear from you!</p>
+            <form action="#" method="post" aria-label="Contact form" class="contact-form">
                 <div class="form-group">
                     <label for="name">Name <span aria-label="required">*</span></label>
                     <input type="text" id="name" name="name" required aria-required="true">
@@ -75,11 +144,20 @@
 
                 <div class="form-group">
                     <label for="message">Message <span aria-label="required">*</span></label>
-                    <textarea id="message" name="message" required aria-required="true"></textarea>
+                    <textarea id="message" name="message" required aria-required="true" placeholder="Tell us what you're looking for..."></textarea>
                 </div>
 
-                <button type="submit" class="cta-button">Send</button>
+                <button type="submit" class="cta-button cta-primary">Send Message</button>
             </form>
+        </section>
+
+        <!-- NEWSLETTER CTA -->
+        <section class="newsletter-cta" aria-label="Newsletter signup call to action">
+            <div class="newsletter-content">
+                <h2>Don't Miss Out on New Releases</h2>
+                <p>Subscribe to our newsletter for book recommendations, special offers, and exclusive updates.</p>
+                <a href="subscribe.html" class="cta-button cta-secondary">Subscribe Today</a>
+            </div>
         </section>
     </main>
 
@@ -87,7 +165,7 @@
     <div id="accessibility-container"></div>
     
     <footer>
-        <p>&copy; 2026 Book Haven Bookstore. All rights reserved.</p>
+        <p>&copy; 2026 Book Haven Bookstore. All rights reserved. | Discover. Read. Inspire.</p>
     </footer>
 
     <script src="api-config.js"></script>
@@ -95,16 +173,101 @@
     <script src="accessibility.js"></script>
 
     <script>
-        // Load accessibility modal FIRST, then initialize
-        fetch('accessibility.html')
-            .then(response => response.text())
-            .then(html => {
-                const container = document.getElementById('accessibility-container');
-                container.innerHTML = html;
-                // Initialize AFTER HTML is loaded
-                setTimeout(() => a11yManager.init(), 100);
-            })
-            .catch(error => console.error('Failed to load accessibility.html:', error));
+        // Load featured books on home page
+        async function loadFeaturedBooks() {
+            const featuredGrid = document.getElementById('featured-books-grid');
+            if (!featuredGrid) return;
+
+            try {
+                // Fetch first 4 books from the API
+                const response = await fetch(
+                    `${ApiConfig.getEndpoint('BOOKS')}?pageNumber=1&pageSize=4`,
+                    {
+                        method: 'GET',
+                        headers: { 'Content-Type': 'application/json' },
+                        mode: 'cors'
+                    }
+                );
+
+                if (!response.ok) throw new Error('Failed to load featured books');
+
+                const data = await response.json();
+                const books = data.data || [];
+
+                featuredGrid.innerHTML = ''; // Clear loading message
+
+                if (books.length === 0) {
+                    featuredGrid.innerHTML = '<p class="no-results">No books available at this time.</p>';
+                    return;
+                }
+
+                books.forEach(book => {
+                    const card = document.createElement('article');
+                    card.classList.add('featured-book-card');
+                    
+                    const coverImage = book.coverImage || `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 220 300'%3E%3Crect fill='${getRandomColor().replace('#', '%23')}' width='220' height='300'/%3E%3C/svg%3E`;
+                    
+                    card.innerHTML = `
+                        <div class="featured-book-image">
+                            <img src="${coverImage}" alt="${escapeHtml(book.title)} book cover" loading="lazy">
+                        </div>
+                        <h3>${escapeHtml(book.title)}</h3>
+                        <p class="author">by ${escapeHtml(book.authorName || 'Unknown')}</p>
+                        <p class="description">${escapeHtml(book.description || 'No description available')}</p>
+                        <span class="genre-tag">${escapeHtml(book.itemTypeName || 'Fiction')}</span>
+                        <p style="margin-top: auto; padding-top: 10px; color: var(--intense-indigo); font-weight: bold; font-size: 1.1rem;">$${parseFloat(book.price).toFixed(2)}</p>
+                        <a href="shop.html" class="cta-button">View Details</a>
+                    `;
+                    featuredGrid.appendChild(card);
+                });
+            } catch (error) {
+                console.error('Error loading featured books:', error);
+                featuredGrid.innerHTML = '<p class="no-results" style="grid-column: 1 / -1;">Unable to load featured books. Please try again later.</p>';
+            }
+        }
+
+        // Helper function to escape HTML
+        function escapeHtml(text) {
+            const map = {
+                '&': '&amp;',
+                '<': '&lt;',
+                '>': '&gt;',
+                '"': '&quot;',
+                "'": '&#039;'
+            };
+            return text.replace(/[&<>"']/g, m => map[m]);
+        }
+
+        // Helper function to get random gradient colors for book cards as fallback
+        function getRandomColor() {
+            const colors = [
+                '#6B5B95', '#88498F', '#D4A574', '#A0826D',
+                '#2C3E50', '#34495E', '#8B0000', '#DC143C',
+                '#1a5490', '#2E7D32', '#6A4C93', '#8B4513'
+            ];
+            return colors[Math.floor(Math.random() * colors.length)];
+        }
+
+        // Load featured books when page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            if (typeof ApiConfig !== 'undefined') {
+                loadFeaturedBooks();
+            }
+        });
+
+        // Load accessibility modal AFTER featured books are loaded
+        setTimeout(() => {
+            fetch('accessibility.html')
+                .then(response => response.text())
+                .then(html => {
+                    const container = document.getElementById('accessibility-container');
+                    container.innerHTML = html;
+                    if (typeof a11yManager !== 'undefined') {
+                        a11yManager.init();
+                    }
+                })
+                .catch(error => console.error('Failed to load accessibility.html:', error));
+        }, 100);
     </script>
 </body>
 

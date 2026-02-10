@@ -132,9 +132,10 @@ document.addEventListener('DOMContentLoaded', () => {
         loadBooks();
         setupPaginationControls();
         setupSearchControls();
-        loadItemTypeFilters(); // Add this line
+        loadItemTypeFilters();
     }
     setupNavigation();
+    setupContactForm();  // Add this line
     cart.updateCartDisplay();
 });
 
@@ -832,4 +833,108 @@ function setupNavigation() {
             hamburger.focus();
         }
     });
+}
+
+// ===== CONTACT FORM FUNCTIONALITY =====
+// Initialize contact submissions from localStorage
+const contactSubmissions = {
+    submissions: JSON.parse(localStorage.getItem('contact-submissions') || '[]'),
+
+    save() {
+        localStorage.setItem('contact-submissions', JSON.stringify(this.submissions));
+    },
+
+    addSubmission(name, email, message) {
+        const submission = {
+            id: Date.now(),
+            name,
+            email,
+            message,
+            timestamp: new Date().toISOString()
+        };
+
+        this.submissions.push(submission);
+        this.save();
+        return submission;
+    },
+
+    getSubmissions() {
+        return this.submissions;
+    },
+
+    getSubmissionById(id) {
+        return this.submissions.find(sub => sub.id === id);
+    },
+
+    deleteSubmission(id) {
+        this.submissions = this.submissions.filter(sub => sub.id !== id);
+        this.save();
+    },
+
+    clearAll() {
+        this.submissions = [];
+        this.save();
+    }
+};
+
+// Setup contact form submission
+function setupContactForm() {
+    const contactForm = document.querySelector('.contact-form');
+    if (!contactForm) return;
+
+    contactForm.addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        const nameInput = document.getElementById('name');
+        const emailInput = document.getElementById('email');
+        const messageInput = document.getElementById('message');
+
+        // Validate inputs
+        if (!nameInput.value.trim() || !emailInput.value.trim() || !messageInput.value.trim()) {
+            showContactNotification('Please fill in all required fields.', 'error');
+            return;
+        }
+
+        // Validate email format
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(emailInput.value)) {
+            showContactNotification('Please enter a valid email address.', 'error');
+            return;
+        }
+
+        // Save to localStorage
+        const submission = contactSubmissions.addSubmission(
+            nameInput.value.trim(),
+            emailInput.value.trim(),
+            messageInput.value.trim()
+        );
+
+        // Clear form
+        contactForm.reset();
+
+        // Show success message
+        showContactNotification('Message sent successfully! We\'ll get back to you soon.', 'success');
+
+        // Optional: Log to console for debugging
+        console.log('Contact submission saved:', submission);
+    });
+}
+
+// Show contact notification
+function showContactNotification(message, type = 'success') {
+    const notification = document.createElement('div');
+    notification.className = `contact-notification ${type}`;
+    notification.textContent = message;
+    notification.setAttribute('role', 'status');
+    notification.setAttribute('aria-live', 'polite');
+    document.body.appendChild(notification);
+
+    setTimeout(() => {
+        notification.classList.add('show');
+    }, 10);
+
+    setTimeout(() => {
+        notification.classList.remove('show');
+        notification.remove();
+    }, 4000);
 }

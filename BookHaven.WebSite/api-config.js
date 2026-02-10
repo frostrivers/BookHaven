@@ -15,6 +15,7 @@ const ApiConfig = {
         GENRES: '/api/genre',
         USERS: '/api/user',
         SUBSCRIBERS: '/api/subscriber',
+        EVENTS: '/api/event',
     },
 
     // Get full endpoint URL
@@ -41,4 +42,8 @@ const ApiConfig = {
 // Make it accessible globally
 if (typeof window !== 'undefined') {
     window.ApiConfig = ApiConfig;
+    // For backward compatibility with events.js
+    window.API_CONFIG = {
+        baseUrl: ApiConfig.BASE_URL
+    };
 }

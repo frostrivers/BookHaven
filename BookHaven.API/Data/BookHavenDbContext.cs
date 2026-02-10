@@ -14,6 +14,8 @@ namespace BookHaven.API.Data
         public DbSet<ItemTypeInfo> ItemTypes { get; set; }
         public DbSet<SellItemInfo> SellItems { get; set; }
         public DbSet<SubscriberInfo> Subscribers { get; set; }
+        public DbSet<EventInfo> Events { get; set; }
+        public DbSet<EventRegistration> EventRegistrations { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -74,6 +76,42 @@ namespace BookHaven.API.Data
             modelBuilder.Entity<SubscriberInfo>()
                 .Property(s => s.Name)
                 .HasMaxLength(100);
+
+            // Configure EventInfo
+            modelBuilder.Entity<EventInfo>()
+                .HasKey(e => e.Id);
+            modelBuilder.Entity<EventInfo>()
+                .Property(e => e.Name)
+                .IsRequired()
+                .HasMaxLength(200);
+            modelBuilder.Entity<EventInfo>()
+                .Property(e => e.EventType)
+                .IsRequired()
+                .HasMaxLength(100);
+            modelBuilder.Entity<EventInfo>()
+                .Property(e => e.Location)
+                .IsRequired()
+                .HasMaxLength(100);
+            modelBuilder.Entity<EventInfo>()
+                .HasMany(e => e.Registrations)
+                .WithOne(r => r.Event)
+                .HasForeignKey(r => r.EventId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            // Configure EventRegistration
+            modelBuilder.Entity<EventRegistration>()
+                .HasKey(r => r.Id);
+            modelBuilder.Entity<EventRegistration>()
+                .Property(r => r.Email)
+                .IsRequired()
+                .HasMaxLength(255);
+            modelBuilder.Entity<EventRegistration>()
+                .Property(r => r.Name)
+                .IsRequired()
+                .HasMaxLength(100);
+            modelBuilder.Entity<EventRegistration>()
+                .HasIndex(r => new { r.EventId, r.Email })
+                .IsUnique();
         }
     }
 }
